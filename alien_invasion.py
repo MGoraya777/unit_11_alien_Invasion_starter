@@ -7,36 +7,36 @@ from alien_fleet import Alienfleet
 
 class AlienInvasion:
 
-    def __init__(self_) -> None:
+    def __init__(self) -> None:
         pygame.init()
-        self_.settings = Settings()
+        self.settings = Settings()
 
-        self_.screen = pygame.display.set_mode(
-            (self_.settings.screen_w, self_.settings.screen_h))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_w, self.settings.screen_h))
         pygame.display.set_caption('Alien Invasion')
 
-        self_.bg = pygame.image.load(self_.settings.bg_file)
-        self_.bg = pygame.transform.scale(
-            self_.bg,
-            (self_.settings.screen_w, self_.settings.screen_h))
+        self.bg = pygame.image.load(self.settings.bg_file)
+        self.bg = pygame.transform.scale(
+            self.bg,
+            (self.settings.screen_w, self.settings.screen_h))
 
-        self_.running = True
-        self_.clock = pygame.time.Clock()
+        self.running = True
+        self.clock = pygame.time.Clock()
 
-        self_.ship = Ship(self_, Arsenal(self_))
-        self_.alien_fleet = Alienfleet(self_)
-        self_.alien_fleet.create_fleet()
+        self.ship = Ship(self, Arsenal(self))
+        self.alien_fleet = Alienfleet(self)
+        self.alien_fleet.create_fleet()
 
         pygame.mixer.init()
-        self_.laser_sound = pygame.mixer.Sound(self_.settings.laser_sound)
-        self_.laser_sound.set_volume(0.7)
+        self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
+        self.laser_sound.set_volume(0.7)
     
     def run_game(self):
         # Game loop
         while self.running:  
             self._check_events()
             self.ship.update()
-            self.alien_fleet.update()
+            self.alien_fleet.update_fleet()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
 
