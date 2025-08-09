@@ -8,12 +8,12 @@ class Settings:
         self.FPS = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'Starbasesnow.png'
         self.difficulty_scale = 1.1
+        self.scores_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
 
         self.ship_file = Path.cwd() / 'Assets' / 'images' / 'ship2(no bg).png'
         self.ship_w = 40
         self.ship_h = 60
        
-
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'
         self.impact = Path.cwd() / 'Assets' / 'sound' / 'impactSound.mp3'
@@ -46,6 +46,7 @@ class Settings:
 
          self.fleet_speed = 2
          self.fleet_drop_speed = 50
+         self.alien_points = 50
          
     def increase_difficulty(self) -> None:
         self.ship_speed *= self.difficulty_scale
