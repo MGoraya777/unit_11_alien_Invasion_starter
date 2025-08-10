@@ -68,7 +68,7 @@ class Ship:
         return self.arsenal.fire_bullet(self)
     
     def muzzle_pos(self):
-        if self.dire_dir > 0:
+        if self.fire_dir > 0:
             return (self.rect.right, self.rect.centery)
         else:
             return (self.rect.left, self.rect.centery)

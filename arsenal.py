@@ -25,9 +25,9 @@ class Arsenal:
         for bullet in self.arsenal:
             bullet.draw_bullet()
 
-    def fire_bullet(self):
+    def fire_bullet(self, ship):
         if len(self.arsenal) < self.settings.bullet_amount:
-            new_bullet = Bullet(self.game)
+            new_bullet = Bullet(self.game, ship)
             self.arsenal.add(new_bullet)
             return True
         return False
