@@ -40,7 +40,7 @@ class Settings:
         self.ship_side = 'left'
 
         self.bullet_deg_right = -90
-        self.bullet_deg_left = 180
+        self.bullet_deg_left = 90
 
     def initialize_dynamic_settings(self) -> None:
          self.ship_speed = 5

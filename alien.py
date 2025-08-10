@@ -32,8 +32,8 @@ class Alien(Sprite):
             # self.settings.fleet_direction *= -1
             # self.y += self.settings.fleet_drop_speed
 
-       self.x += temp_speed * self.fleet.fleet_direction
-       self.rect.x = self.x
+       self.x += self.fleet.fleet_direction * self.fleet.game.settings.fleet_speed
+       self.rect.x = int(self.x)
        self.rect.y = self.y
 
     def check_edges(self):

@@ -12,7 +12,7 @@ class Alienfleet:
         self.game = game
         self.settings = game.settings
         self.fleet = pygame.sprite.Group()
-        self.fleet_direction = self.settings.fleet_direction
+        self.fleet_direction = -1 if getattr(self.settings, 'ship_side', 'left') == 'left' else 1
         self.fleet_drop_speed = self.settings.fleet_drop_speed
 
         self.create_fleet()
@@ -38,15 +38,24 @@ class Alienfleet:
                 self._create_alien(current_x, current_y)
 
     def calculate_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h):
-        half_screen = self.settings.screen_h//2
+        ship_side = getattr(self.settings, 'ship_side', 'left')
+
         fleet_horizontal_space = fleet_w * alien_w
         fleet_vertical_space = fleet_h * alien_h
-        x_offset = int((screen_w - fleet_horizontal_space)//2)
-        y_offset = int((half_screen - fleet_vertical_space)//2)
+
+        y_offset = int((self.settings.screen_h - fleet_vertical_space)//2)
+
+        if ship_side == 'left':
+            half_start = screen_w // 2
+            x_offset = int(half_start + ((screen_w // 2 - fleet_horizontal_space) // 2))
+        else:
+            x_offset = int(((screen_w // 2 - fleet_horizontal_space) // 2))
+
         return x_offset,y_offset
 
     def calculate_fleet_size(self, alien_w, alien_h, screen_w, screen_h) -> Any:
-        fleet_w = (screen_w//alien_w) 
+        half_w = screen_w // 2
+        fleet_w = (half_w//alien_w) 
         fleet_h = ((screen_h /2)//alien_h)
 
         if fleet_w % 2 == 0:
@@ -59,7 +68,7 @@ class Alienfleet:
         else:
             fleet_h -= 2
 
-        return int(fleet_w), int(fleet_h)
+        return int(max(1, fleet_w)), int(max(1, fleet_h))
 
     def _create_alien(self, current_x: int, current_y: int):
         new_alien = Alien(self, current_x, current_y)
@@ -67,12 +76,13 @@ class Alienfleet:
         self.fleet.add(new_alien)
 
     def _check_fleet_edges(self) -> None:
-        alien: Alien 
-        for alien in self.fleet:
-            if alien.check_edges():
-              self._drop_alien_fleet()
-              self.fleet_direction *= -1
-              break
+       # alien: Alien 
+        #for alien in self.fleet:
+           # if alien.check_edges():
+            #  self._drop_alien_fleet()
+             # self.fleet_direction *= -1
+              #break
+        pass
 
     def _drop_alien_fleet(self) -> None:
         for alien in self.fleet:
@@ -91,10 +101,15 @@ class Alienfleet:
         return pygame.sprite.groupcollide(self.fleet, other_group, True, True)
     
     def check_fleet_bottom(self):
-        alien: Alien
-        for alien in self.fleet:
-            if alien.rect.bottom >= self.settings.screen_h:
-                return True
+        ship_side = getattr(self.settings, 'ship_side', 'left')
+        if ship_side == 'left':
+            for alien in self.fleet:
+                if alien.rect.left <= 0:
+                    return True
+        else:
+            for alien in self.fleet:
+                if alien.rect.right >= self.settings.screen_w:
+                    return True
         return False 
     
     def check_destroyed_status(self):
