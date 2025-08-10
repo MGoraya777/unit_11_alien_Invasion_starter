@@ -6,27 +6,27 @@ from arsenal import Arsenal
 
 class AlienInvasion:
 
-    def __init__(self_) -> None:
+    def __init__(self) -> None:
         pygame.init()
-        self_.settings = Settings()
+        self.settings = Settings()
 
-        self_.screen = pygame.display.set_mode(
-            (self_.settings.screen_w, self_.settings.screen_h))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_w, self.settings.screen_h))
         pygame.display.set_caption('Alien Invasion')
 
-        self_.bg = pygame.image.load(self_.settings.bg_file)
-        self_.bg = pygame.transform.scale(
-            self_.bg,
-            (self_.settings.screen_w, self_.settings.screen_h))
+        self.bg = pygame.image.load(self.settings.bg_file)
+        self.bg = pygame.transform.scale(
+            self.bg,
+            (self.settings.screen_w, self.settings.screen_h))
 
-        self_.running = True
-        self_.clock = pygame.time.Clock()
+        self.running = True
+        self.clock = pygame.time.Clock()
 
-        self_.ship = Ship(self_, Arsenal(self_))
+        self.ship = Ship(self, Arsenal(self))
 
         pygame.mixer.init()
-        self_.laser_sound = pygame.mixer.Sound(self_.settings.laser_sound)
-        self_.laser_sound.set_volume(0.7)
+        self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
+        self.laser_sound.set_volume(0.7)
     
     def run_game(self):
         # Game loop
@@ -40,7 +40,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         pygame.display.flip()
-
+ 
     def _check_events(self):
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
@@ -77,4 +77,4 @@ class AlienInvasion:
 if __name__ == "__main__":
     ai = AlienInvasion()
     ai.run_game()
-    pass
+    pass 
