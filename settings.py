@@ -3,7 +3,7 @@ class Settings:
     
     def __init__(self):
         self.name: str = 'Alien Invasion'
-        self.screen_w = 1000
+        self.screen_w = 1200
         self.screen_h = 700
         self.FPS = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'Starbasesnow.png'
@@ -24,9 +24,12 @@ class Settings:
         self.alien_file = Path.cwd() / 'Assets' / 'images' / 'enemy_4.png'
         self.alien_w = 40
         self.alien_h = 40
+        self.alien_deg_right = -90
+        self.alien_deg_left = 90
         
         self.fleet_direction = 1
-        
+        self.fleet_shape = 'grid'
+
 
         self.button_w = 200
         self.button_h = 50
@@ -52,7 +55,7 @@ class Settings:
          self.bullet_h = 80
 
          self.fleet_speed = 2
-         self.fleet_drop_speed = 50
+         self.fleet_drop_speed = 20
          self.alien_points = 50
          
     def increase_difficulty(self) -> None:
