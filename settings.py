@@ -13,6 +13,8 @@ class Settings:
         self.ship_file = Path.cwd() / 'Assets' / 'images' / 'ship2(no bg).png'
         self.ship_w = 40
         self.ship_h = 60
+        self.ship_deg_right = -90
+        self.ship_deg_left = 90
        
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'laserBlast.png'
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'laser.mp3'
@@ -34,6 +36,11 @@ class Settings:
         self.button_font_size = 40
         self.HUD_font_size = 20
         self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
+
+        self.ship_side = 'left'
+
+        self.bullet_deg_right = -90
+        self.bullet_deg_left = 180
 
     def initialize_dynamic_settings(self) -> None:
          self.ship_speed = 5
